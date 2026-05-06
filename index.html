@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 3 IsiZulu Game</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    border-radius:20px;
+    border:5px solid black;
+}
+
+h1{
+    font-size:40px;
+}
+
+.game-box{
+    margin-top:30px;
+    border:3px solid black;
+    border-radius:20px;
+    padding:20px;
+}
+
+.question{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.answers button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:18px;
+    font-size:24px;
+    border-radius:15px;
+    border:3px solid black;
+    background:white;
+}
+
+.answers button:hover{
+    background:black;
+    color:white;
+}
+
+.score{
+    font-size:30px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.animal{
+    font-size:80px;
+}
+
+.next-btn{
+    margin-top:20px;
+    padding:15px 40px;
+    font-size:24px;
+    border:none;
+    border-radius:15px;
+    background:black;
+    color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎮 IsiZulu FAL Game</h1>
+<h2>Grade 3</h2>
+
+<div class="game-box">
+
+<div class="animal" id="animal">🐔</div>
+
+<div class="question" id="question">
+Yisiphi isilwane lesi?
+</div>
+
+<div class="answers" id="answers">
+<button onclick="checkAnswer('inkukhu')">inkukhu</button>
+<button onclick="checkAnswer('imbuzi')">imbuzi</button>
+<button onclick="checkAnswer('ihhashi')">ihhashi</button>
+</div>
+
+<div class="score" id="score">
+Amaphuzu: 0
+</div>
+
+<button class="next-btn" onclick="nextQuestion()">
+➡️ Olandelayo
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let score = 0;
+let current = 0;
+
+const questions = [
+
+{
+animal:"🐔",
+question:"Yisiphi isilwane lesi?",
+correct:"inkukhu",
+answers:["inkukhu","imbuzi","ihhashi"]
+},
+
+{
+animal:"🐄",
+question:"Yisiphi isilwane lesi?",
+correct:"inkomo",
+answers:["inkomo","inkukhu","ingulube"]
+},
+
+{
+animal:"🐖",
+question:"Yisiphi isilwane lesi?",
+correct:"ingulube",
+answers:["ihhashi","ingulube","imbuzi"]
+},
+
+{
+animal:"🐎",
+question:"Yisiphi isilwane lesi?",
+correct:"ihhashi",
+answers:["inkukhu","ihhashi","inkomo"]
+},
+
+{
+animal:"🐐",
+question:"Yisiphi isilwane lesi?",
+correct:"imbuzi",
+answers:["imbuzi","ingulube","inkomo"]
+}
+
+];
+
+function loadQuestion(){
+
+document.getElementById("animal").innerHTML =
+questions[current].animal;
+
+document.getElementById("question").innerHTML =
+questions[current].question;
+
+let buttons = document.querySelectorAll(".answers button");
+
+for(let i=0; i<buttons.length; i++){
+buttons[i].innerHTML = questions[current].answers[i];
+}
+
+}
+
+function checkAnswer(answer){
+
+if(answer === questions[current].correct){
+
+score++;
+
+alert("✅ Kulungile!");
+
+}else{
+
+alert("❌ Cha! Impendulo: " + questions[current].correct);
+
+}
+
+document.getElementById("score").innerHTML =
+"Amaphuzu: " + score;
+
+}
+
+function nextQuestion(){
+
+current++;
+
+if(current >= questions.length){
+
+document.querySelector(".game-box").innerHTML =
+
+"<h1>🎉 Uqedile!</h1>" +
+"<h2>Amaphuzu akho: " + score + " / " + questions.length + "</h2>";
+
+return;
+
+}
+
+loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
